@@ -37,6 +37,7 @@
                     })
                 promises.push(promise)
             }
+            
             for(const jsonsData of this.loadOrder.jsons){
                 const {name, address} = jsonsData
                 const promise = Loader

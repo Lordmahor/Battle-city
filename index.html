@@ -17,10 +17,13 @@
     loader.addImage('Vavada', 'static/Vavada.jpg')
     loader.addJson('persons', 'static/persons.json')
     loader.load(() => {
-        console.log('Все загруженно')
+        document.body.append(loader.resources.images.Vavada)
+        for(const logs of loader.resources.jsons.persons){
+            console.log(logs.name+" "+logs.age+" лет")
+        }
     })
 
-    // GameEngine.Loader.loadImage('static/Vavada.jpg').then(image =>{
+    // Loader.loadImage('static/Vavada.jpg').then(image =>{
     //     console.log(image)
     //     document.body.append(image)
     // })
