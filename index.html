@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle City</title>
+</head>
+<body>
+    <!--    
+        1) Loader
+        2> Applcation
+        3) rendering
+    -->
+    <script src="/engine/Loader.js"></script>
+    <script>
+    const { Loader } = GameEngine
+    const loader = new Loader
+    loader.addImage('Vavada', 'static/Vavada.jpg')
+    loader.addJson('persons', 'static/persons.json')
+    loader.load(() => {
+        console.log('Все загруженно')
+    })
+
+    // GameEngine.Loader.loadImage('static/Vavada.jpg').then(image =>{
+    //     console.log(image)
+    //     document.body.append(image)
+    // })
+    
+    
+    
+    </script>
+</body>
+</html>
