@@ -5,31 +5,19 @@
     <title>Battle City</title>
 </head>
 <body>
-    <!--    
-        1) Loader
-        2> Applcation
-        3) rendering
-    -->
+    <script src="engine/Renderer.js"></script>
+    <script src="engine/DisplayObject.js"></script>
     <script src="engine/Loader.js"></script>
-    <script>
-    const { Loader } = GameEngine
-    const loader = new Loader
-    loader.addImage('Vavada', 'static/Vavada.jpg')
-    loader.addJson('persons', 'static/persons.json')
-    loader.load(() => {
-        document.body.append(loader.resources.images.Vavada)
-        for(const logs of loader.resources.jsons.persons){
-            console.log(logs.name+" "+logs.age+" лет")
-        }
-    })
+    <script src="engine/Sprite.js"></script>
+    <script src="engine/Container.js"></script>
+    <script src="engine/Game.js"></script>
+    <script src="engine/Scene.js"></script>
+    <script src="engine/Keyboard.js"></script>
+    <script src="engine/Mouse.js"></script>
+    <script src="engine/Point.js"></script>
+    <script src="engine/Line.js"></script>
+    <script src="engine/Body.js"></script>
 
-    // Loader.loadImage('static/Vavada.jpg').then(image =>{
-    //     console.log(image)
-    //     document.body.append(image)
-    // })
-    
-    
-    
-    </script>
+    <script src="game/index.js"></script>
 </body>
 </html>
