@@ -11,6 +11,9 @@
             this.space = false
             document.body.addEventListener('keydown',function (event){
                 switch (event.code){
+                    case 'Space':
+                        keyboard.space = true
+                        break
                     case 'ArrowUp':
                         keyboard.arrowUp = true
                         break
@@ -23,13 +26,13 @@
                     case 'ArrowRight':
                         keyboard.arrowRight = true
                         break
-                    case 'Space':
-                        keyboard.space = true
-                        break
                 }
             })
             document.body.addEventListener('keyup',function (event){
                 switch (event.code){
+                    case 'Space':
+                        keyboard.space = false
+                        break
                     case 'ArrowUp':
                         keyboard.arrowUp = false
                         break
@@ -41,9 +44,6 @@
                         break
                     case 'ArrowRight':
                         keyboard.arrowRight = false
-                        break
-                    case 'Space':
-                        keyboard.space = false
                         break
                 }
             })

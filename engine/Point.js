@@ -10,7 +10,7 @@
             super.draw(()=>{
                 context.fillStyle = this.color
                 context.beginPath()
-                context.arc(this.x,this.y,2,0,Math.PI*2)
+                context.arc(this.x,this.y,10,0,Math.PI*2)
                 context.fill()
 
             })

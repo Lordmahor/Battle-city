@@ -14,7 +14,7 @@
             super.draw(()=>{
                 context.strokeStyle = this.color
                 context.beginPath()
-                context.lineWidth = 1
+                context.lineWidth = 4
                 context.moveTo(this.x1,this.y1)
                 context.lineTo(this.x2,this.y2)
                 context.stroke()

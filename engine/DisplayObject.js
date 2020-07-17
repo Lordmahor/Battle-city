@@ -1,12 +1,13 @@
 ;(function(){
     'use strict'
     //Это то что надо отобразить( Любая сущность)
-    class DisplayObject {
+    class DisplayObject extends GameEngine.EventEmitter{
         constructor(args={}){
+            super()
+            this.uid = GameEngine.Util.generateUid()
             //все что есть у DisplayObject (но не точно что все ^_^)
             this.x = args.x || 0
             this.y = args.y || 0
-
             this.width = args.width || 0
             this.height = args.height || 0
             //поворот
@@ -29,17 +30,17 @@
         //get и set (геттеры и сеттеры вычисляются на лету, псведо поля)
         //Абсолютные X и Y это точка слева сверху где начинается отрисовка
         get absoluteX (){
-            return this.x - this.anchorX * this.width
+            return this.x - this.anchorX * this.width * this.scaleX
         }
         set absoluteX(value){
-            this.x = value + this.anchorX * this.width
+            this.x = value + this.anchorX * this.width * this.scaleX
             return value
         }
         get absoluteY (){
-            return this.y - this.anchorY * this.height
+            return this.y - this.anchorY * this.height * this.scaleY
         }
         set absoluteY(value){
-            this.y = value + this.anchorY * this.height
+            this.y = value + this.anchorY * this.height * this.scaleY
             return value
         }
 
