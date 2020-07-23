@@ -15,6 +15,9 @@
             this.animation = ''
             this.frameNumber = 0
             this.frameDelay = 0
+            this.animationPaused = false
+
+            this.keysDefault = args.keysDefault || []
 
             this.velocity = {
                 x: velocity || 0,
@@ -54,8 +57,16 @@
             this.setFrameByKeys(...keys[0])
         }
 
+        pauseAnimation(){
+            this.animationPaused = true
+        }
+
+        resumeAnimation(){
+            this.animationPaused = false
+        }
+
         setFrameByKeys(...keys){
-            const frame = this.getFrameByKeys(...keys)
+            const frame = this.getFrameByKeys(...keys, ...this.keysDefault)
             if(!frame){
                 return false
             }
@@ -84,7 +95,7 @@
         }
 
         tick(timestamp){
-            if (this.animation && GameEngine.Util.delay(this.animation + this.uid, this.frameDelay)){
+            if (!this.animationPaused && this.animation && GameEngine.Util.delay(this.animation + this.uid, this.frameDelay)){
                 const { keys } = this.animations[this.animation]
                 this.emit('frameUpdate', this)
                 this.frameNumber = (this.frameNumber + 1) % keys.length
@@ -104,7 +115,6 @@
             context.rotate(-this.rotation)
             //масштаб
             // context.scale(this.scaleX, this.scaleY)
-            console.log(this.texture)
 
             if(this.texture){
                 context.drawImage(

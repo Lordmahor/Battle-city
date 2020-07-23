@@ -8,12 +8,14 @@
             //Очередь загрузки
             this.loadOrder = {
                 images: [],
-                jsons: []
+                jsons: [],
+                sounds: []
             }
             //Загруженные ресурсы
             this.resources = {
-                images: [],
-                jsons: []
+                images: {},
+                jsons: {},
+                sounds: {}
             }
         }
         //Функция добавления в очередь загрузки картинки
@@ -24,6 +26,9 @@
         addJson(name, address){
             this.loadOrder.jsons.push({ name,address })
         }
+        addSound(name, src){
+            this.loadOrder.sounds.push({ name,src })
+        }
         //Возвращаем обьект по имени
         getImage (name) {
             return this.resources.images[name]
@@ -32,6 +37,9 @@
         //Возвращаем обьект по имени
         getJson (name) {
             return this.resources.jsons[name]
+        }
+        getSound (name) {
+            return this.resources.sounds[name]
         }
 
         //Загрузчик
@@ -66,6 +74,19 @@
                     })
                 promises.push(promise)
             }
+            for(const soundData of this.loadOrder.sounds){
+                const {name, src} = soundData
+                const promise = Loader
+                    .loadSound(src)
+                    .then(audio =>{
+                        this.resources.sounds[name] = audio
+                        if (this.loadOrder.sounds.includes(soundData)){
+                            const index = this.loadOrder.sounds.indexOf(soundData)
+                            this.loadOrder.sounds.splice(index, 1)
+                        }
+                    })
+                promises.push(promise)
+            }
             //После того как все обещания выполнены вызываю колбек функцию
             Promise.all(promises).then(() => callback())
 
@@ -87,6 +108,20 @@
                     const image = new Image
                     image.onload = () => resolve(image)
                     image.src = src
+                }
+                catch(err){
+                    reject(err)
+                }
+            })
+        }
+        static loadSound (src) {
+            return new Promise((resolve, reject) => {
+                try{
+                    const audio = new Audio
+                    audio.addEventListener('canplaythrough',()=> resolve(audio))
+                    audio.src = src
+
+                    
                 }
                 catch(err){
                     reject(err)

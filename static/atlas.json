@@ -3,8 +3,8 @@
         "moveUp": {
             "durations": 300,
             "keys": [
-                ["tank", "yellow", "type1", "up", "frame1"],
-                ["tank", "yellow", "type1", "up", "frame2"]
+                ["tank", "up", "frame1"],
+                ["tank", "up", "frame2"]
             ]
         },
 

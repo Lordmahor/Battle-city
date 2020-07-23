@@ -1,6 +1,7 @@
 class Bullet extends GameEngine.Body {
     constructor(originalArgs = {}){
         const args = Object.assign({
+            scale: 2,
             anchorY: 0.5,
             anchorX: 0.5,
         }, originalArgs)
@@ -13,8 +14,11 @@ class Bullet extends GameEngine.Body {
         this.setAnimationsCollection(Bullet.atlas.actions)
         // this.startAnimation('moveUp')
 
-        this.on('collision',(a, b) =>{
-            if(b === this.tank){
+        this.on('collision',(a,b) =>{
+            if(a === this.tank){
+                return
+            }
+            if(a.isEnemy&&b.isEnemy){
                 return
             }
             this.toDestroy = true
@@ -25,9 +29,8 @@ class Bullet extends GameEngine.Body {
 
         delete this.tank
         
-        const scene = Util.getScene(this)
-        scene.remove(this)
-        scene.arcadePhysics.remove(this)
+        this.scene.arcadePhysics.remove(this)
+        this.scene.remove(this)
     }
 }
 Bullet.NORMAL_SPEED = 5
